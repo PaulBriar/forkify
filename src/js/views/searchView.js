@@ -1,30 +1,32 @@
 import { elements } from './base';
-
+//Collect search bar input
 export const getInput = () => elements.searchInput.value;
-
+//Clear search bar input field
 export const clearInput = () => {
     elements.searchInput.value = '';
 };
-
+//Clear recipe results before new search
 export const clearResults = () => {
     elements.searchResultList.innerHTML = '';
     elements.searchResPages.innerHTML = '';
 };
-
+//Limit recipe title to one line in results
 const limitRecipeTitle = (recipe, limit = 17) => {
     const newTitle = [];
     if (recipe.length > limit) {
         recipe.split(' ').reduce((acc, cur) => {
+            //Check if length of combined words < 17
             if (acc + cur.length <= limit) {
                 newTitle.push(cur);
             }
             return acc + cur.length;
         }, 0);
+        //Break newTitle array back into sentence
         return `${newTitle.join(' ')} ...`;
     }
     return recipe;
 };
-
+//Build recipe search results markup
 const renderRecipe = recipe => {
     const markup = `
         <li>
@@ -39,9 +41,10 @@ const renderRecipe = recipe => {
             </a>
         </li>
     `;
+    //Add to UI
     elements.searchResultList.insertAdjacentHTML('beforeend', markup);
 };
-
+//Add pagination button to recipe search results
 const createButton = (page, type) => `
     <button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
         <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
@@ -50,7 +53,7 @@ const createButton = (page, type) => `
         </svg>
     </button>
 `;
-
+//Add correct pagination buttons
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
     let button;
@@ -64,10 +67,10 @@ const renderButtons = (page, numResults, resPerPage) => {
     } else if (page === pages && pages > 1) {
         button = createButton(page, 'prev');
     }
-
+    //Add search results top down plus button
     elements.searchResPages.insertAdjacentHTML('afterbegin', button);
 };
-
+//Render recipe search results component
 export const renderResults = (recipes, page = 1, resPerPage = 10) => {
     //Render results of current page
     const start = (page - 1) * resPerPage;

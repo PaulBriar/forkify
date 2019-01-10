@@ -9,7 +9,7 @@ export const elements = {
 export const elementStrings = {
     loader: 'loader'
 };
-
+//Render AJAX spinner
 export const renderLoader = parent => {
     const loader = `
         <div class="${elementStrings.loader}">
@@ -20,7 +20,7 @@ export const renderLoader = parent => {
     `;
     parent.insertAdjacentHTML('afterbegin', loader);
 };
-
+//Clear spinner when api loaded
 export const clearLoader = () => {
     const loader = document.querySelector(`.${elementStrings.loader}`);
     if (loader) loader.parentElement.removeChild(loader);
