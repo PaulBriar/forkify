@@ -10,6 +10,20 @@ export const clearResults = () => {
     elements.searchResultList.innerHTML = '';
 };
 
+const limitRecipeTitle = (recipe, limit = 17) => {
+    const newTitle = [];
+    if (recipe.length > limit) {
+        recipe.split(' ').reduce((acc, cur) => {
+            if (acc + cur.length <= limit) {
+                newTitle.push(cur);
+            }
+            return acc + cur.length;
+        }, 0);
+        return `${newTitle.join(' ')} ...`;
+    }
+    return recipe;
+};
+
 const renderRecipe = recipe => {
     const markup = `
         <li>
@@ -18,13 +32,13 @@ const renderRecipe = recipe => {
                     <img src="${recipe.image_url}" alt="${recipe.title}">
                 </figure>
                 <div class="results__data">
-                    <h4 class="results__name">${recipe.title}</h4>
+                    <h4 class="results__name">${limitRecipeTitle(recipe.title)}</h4>
                     <p class="results__author">${recipe.publisher}</p>
                 </div>
             </a>
         </li>
     `;
-    elements.searchResultList.insertAdjacentHTML('beforebegin', markup);
+    elements.searchResultList.insertAdjacentHTML('beforeend', markup);
 };
 
 export const renderResults = recipes => {
