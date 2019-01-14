@@ -17,5 +17,4 @@ export default class Search {
             alert(err);
         };
     };
-
-}
+};
