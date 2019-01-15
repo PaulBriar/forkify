@@ -2,6 +2,7 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
 //Global state of app
@@ -38,6 +39,11 @@ elements.searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
     controlSearch();
 });
+//Testing
+window.addEventListener('load', (event) => {
+    event.preventDefault();
+    controlSearch();
+});
 //Control pagination click event
 elements.searchResPages.addEventListener('click', event => {
     const button = event.target.closest('.btn-inline');
@@ -60,8 +66,9 @@ const controlRecipe = async () => {
         state.recipe = new Recipe(id);
 
         try {
-            //Get recipe data
+            //Get recipe data & parse ingredients
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
             //Calculate servings and time
             state.recipe.calcTime();
             state.recipe.calcServings();
