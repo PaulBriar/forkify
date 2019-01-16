@@ -1,6 +1,7 @@
 import Recipe from '../models/Recipe';
-
+import * as recipeView from '../views/recipeView';
 import {state} from './appState';
+import { elements, clearLoader, renderLoader } from '../views/base';
 
 //Recipe Controller
 export const controlRecipe = async () => {
@@ -9,7 +10,8 @@ export const controlRecipe = async () => {
 
     if (id) {
         //Prepare UI for changes
-
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
         //Create new recipe object
         state.recipe = new Recipe(id);
 
@@ -22,8 +24,12 @@ export const controlRecipe = async () => {
             state.recipe.calcServings();
             //Render recipe
             console.log(state.recipe);
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
         } catch (err) {
             alert(`Error processing recipe data!`);
+            console.log(err);
+
         };
     };
 };

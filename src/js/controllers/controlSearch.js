@@ -1,7 +1,6 @@
 import Search from '../models/Search';
 import * as searchView from '../views/searchView';
 import { elements, renderLoader, clearLoader } from '../views/base';
-
 import {state} from './appState';
 
 //Search Controller
