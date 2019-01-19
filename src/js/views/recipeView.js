@@ -115,10 +115,10 @@ export const renderRecipe = recipe => {
 
 export const updateServingsIngredients = recipe => {
     //Update servings
-    document.querySelector('.recipe__info-date--people').textContent = recipe.servings;
+    document.querySelector('.recipe__info-data--people').textContent = recipe.servings;
     //Update ingredients
     const countElements = Array.from(document.querySelectorAll('.recipe__count'));
     countElements.forEach((el, i) => {
-        el.textContent = formatCount(recipe.ingredient[i].count);
+        el.textContent = formatCount(recipe.ingredients[i].count);
     });
 };

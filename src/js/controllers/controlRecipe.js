@@ -26,7 +26,6 @@ export const controlRecipe = async () => {
             state.recipe.calcTime();
             state.recipe.calcServings();
             //Render recipe
-            console.log(state.recipe);
             clearLoader();
             recipeView.renderRecipe(state.recipe);
         } catch (err) {
@@ -50,6 +49,5 @@ elements.recipe.addEventListener('click', event => {
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
     }
-    console.log(state.recipe);
 
 });
