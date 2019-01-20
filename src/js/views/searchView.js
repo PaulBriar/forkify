@@ -16,10 +16,10 @@ export const highlightSelected = id => {
     resultsArr.forEach(el => {
         el.classList.remove('results__link--active');
     });
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 };
 //Limit recipe title to one line in results
-const limitRecipeTitle = (recipe, limit = 17) => {
+export const limitRecipeTitle = (recipe, limit = 17) => {
     const newTitle = [];
     if (recipe.length > limit) {
         recipe.split(' ').reduce((acc, cur) => {
