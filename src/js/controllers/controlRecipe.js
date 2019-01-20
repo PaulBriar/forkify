@@ -4,6 +4,7 @@ import * as recipeView from '../views/recipeView';
 import * as searchView from '../views/searchView';
 import {state} from './appState';
 import { elements, clearLoader, renderLoader } from '../views/base';
+import {controlList} from '../controllers/controlList';
 
 //Recipe Controller
 export const controlRecipe = async () => {
@@ -49,6 +50,8 @@ elements.recipe.addEventListener('click', event => {
     } else if (event.target.matches('.btn-increase, .btn-increase *')) {
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
+    } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        controlList();
     }
 
 });
