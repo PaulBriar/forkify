@@ -7,15 +7,16 @@ export const clearRecipe = () => {
 
 const formatCount = count => {
     if (count) {
-        const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+        const newCount = Math.round(count * 10000) / 10000;
+        const [int, dec] = newCount.toString().split('.').map(el => parseInt(el, 10));
 
-        if (!dec) return count;
+        if (!dec) return newCount;
 
         if (int === 0) {
-            const fract = new Fraction(count);
+            const fract = new Fraction(newCount);
             return `${fract.numerator}/${fract.denominator}`;
         } else {
-            const fract = new Fraction(count - int);
+            const fract = new Fraction(newCount - int);
             return `${int} ${fract.numerator}/${fract.denominator}`;
         }
     }
@@ -27,7 +28,7 @@ const createIngredient = ingredient => `
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${formatCount(ingredient.count)}</div>
+        <div class="recipe__count">${formatCount(ingredient.newCount)}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
                         ${ingredient.ingredient}
@@ -119,6 +120,6 @@ export const updateServingsIngredients = recipe => {
     //Update ingredients
     const countElements = Array.from(document.querySelectorAll('.recipe__count'));
     countElements.forEach((el, i) => {
-        el.textContent = formatCount(recipe.ingredients[i].count);
+        el.textContent = formatCount(recipe.ingredients[i].newCount);
     });
 };

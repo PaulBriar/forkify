@@ -6,7 +6,6 @@ import {state} from './appState';
 import { elements, clearLoader, renderLoader } from '../views/base';
 import {controlList} from '../controllers/controlList';
 import {controlLike} from '../controllers/controlLike';
-import Likes from '../models/Likes';
 
 //Recipe Controller
 export const controlRecipe = async () => {
@@ -42,8 +41,6 @@ export const controlRecipe = async () => {
         };
     };
 };
-
-state.likes = new Likes();
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
