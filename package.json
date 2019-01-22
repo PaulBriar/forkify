@@ -4,9 +4,10 @@
   "description": "Recipe Search App",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open",
+    "dev": "webpack-dev-server --mode development --open",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack --mode production",
     "test": "jest"
   },
   "repository": {
@@ -33,6 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "express": "^4.16.4",
     "fractional": "^1.0.0",
     "uniqid": "^5.0.3"
   }
