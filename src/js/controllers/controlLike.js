@@ -41,3 +41,4 @@ window.addEventListener('load', () => {
     //Render existing likes
     state.likes.likes.forEach(el => likesView.renderLike(like));
 });
+

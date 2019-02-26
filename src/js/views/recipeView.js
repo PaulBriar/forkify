@@ -28,7 +28,7 @@ const createIngredient = ingredient => `
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${formatCount(ingredient.newCount)}</div>
+        <div class="recipe__count">${formatCount(ingredient.count)}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
                         ${ingredient.ingredient}
@@ -40,8 +40,8 @@ export const renderRecipe = (recipe, isLiked) => {
     const markup = `
             <figure class="recipe__fig">
             <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
-            <h1 class="${recipe.title}">
-                <span>Pasta with tomato cream sauce</span>
+            <h1 class="recipe__title">
+                <span>${recipe.title}</span>
             </h1>
         </figure>
 
@@ -120,6 +120,6 @@ export const updateServingsIngredients = recipe => {
     //Update ingredients
     const countElements = Array.from(document.querySelectorAll('.recipe__count'));
     countElements.forEach((el, i) => {
-        el.textContent = formatCount(recipe.ingredients[i].newCount);
+        el.textContent = formatCount(recipe.ingredients[i].count);
     });
 };
